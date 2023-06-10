@@ -195,6 +195,34 @@ class MedicalGraph:
                 print(e)
             return
 
+    '''导出数据'''
+    def export_data(self):
+        Drugs, Foods, Checks, Departments, Symptoms, Diseases, \
+            disease_infos, rels_check, rels_doeat, rels_noteat, \
+            rels_drug, rels_category, rels_department, rels_accompany, \
+            rels_symptom = self.read_nodes()
+        f_drug = open('./dict/drug.txt', 'w+')
+        f_food = open('./dict/food.txt', 'w+')
+        f_check = open('./dict/check.txt', 'w+')
+        f_department = open('./dict/department.txt', 'w+')
+        f_symptom = open('./dict/symptoms.txt', 'w+')
+        f_disease = open('./dict/disease.txt', 'w+')
+
+        f_drug.write('\n'.join(list(Drugs)))
+        f_food.write('\n'.join(list(Foods)))
+        f_check.write('\n'.join(list(Checks)))
+        f_department.write('\n'.join(list(Departments)))
+        f_symptom.write('\n'.join(list(Symptoms)))
+        f_disease.write('\n'.join(list(Diseases)))
+
+        f_drug.close()
+        f_food.close()
+        f_check.close()
+        f_department.close()
+        f_symptom.close()
+        f_disease.close()
+
+        return
 
 if __name__ == '__main__':
     handler = MedicalGraph()
@@ -204,4 +232,5 @@ if __name__ == '__main__':
     print("step2:开始构建图谱实体间的关系")
     handler.create_graphrels()
     print("step2:实体间的关系构建完成！")
+    handler.export_data()
     print("\n图谱构建完成！")
